@@ -33,12 +33,13 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * Get the displays associated with the user.
+     * Defines a one-to-many relationship.
      *
-     * @var array<string, string>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function displays()
+    {
+        return $this->hasMany(Display::class);
+    }
 }

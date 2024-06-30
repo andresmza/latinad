@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('displays', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->text('description');
+            $table->float('price_per_day');
+            $table->integer('resolution_height');
+            $table->integer('resolution_width');
+            $table->enum('type', ['indoor', 'outdoor']);
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('displays');
     }
 };
